@@ -1,0 +1,71 @@
+{% extends 'base_welcome.html' %}
+
+{% block title %}
+<title>Customer Register</title>
+{% endblock %}
+
+{% block nav_tag %}
+{% include "partials/_authe_nav.html" %}
+{% endblock %}
+
+
+{% block body_title %}
+<h1 style="text-align: center;">Customer Profile page</h1>
+{% endblock %}
+
+{% block form %}
+{% if form %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Profile</th>
+            <th scope="col">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Username</th>
+            <td>{{form.username}}</td>
+        </tr>
+        <tr>
+            <th scope="row">First Name</th>
+            <td>{{form.first_name|title}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Last Name</th>
+            <td>{{form.last_name|title}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Email</th>
+            <td>{{form.email}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Phone</th>
+            <td>{{form.phone}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Dob</th>
+            <td>{{form.dob}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Gender</th>
+            <td>{{form.gender}}</td>
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
+
+{% block button %}
+{% endblock %}
+
+{% block foot %}
+{% endblock %}
+
+{% block offer %}
+{% endblock %}
+
+{% block footer_tag %}
+{% include "partials/_authe_footer.html" %}
+{% endblock %}

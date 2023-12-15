@@ -15,21 +15,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from Grocery.views import home_view
 
 urlpatterns = [
     path('Admin/', admin.site.urls),
-    path(route='customer_app/',view=include('customer_app.urls'),name='customer_app'),
-    path(route='admin_app/',view=include('admin_app.urls'),name='admin_app'),
-    path(route='cart/',view=include('cart.urls'),name='cart'),
-    path(route='buy_app/',view=include('buy_app.urls'),name='buy_app'),
-    path(route='',view=home_view,name='home_view'),
+    path(route='customer_app/',
+         view=include('customer_app.urls'), name='customer_app'),
+    path(route='admin_app/', view=include('admin_app.urls'), name='admin_app'),
+    path(route='cart/', view=include('cart.urls'), name='cart'),
+    path(route='buy_app/', view=include('buy_app.urls'), name='buy_app'),
+    path(route='', view=home_view, name='home_view'),
 
 ]
 
 if settings.DEBUG:
-    urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
-    # urlpatterns+=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+    # urlpatterns += static(settings.STATIC_URL,
+    #   document_root=settings.STATIC_ROOT)

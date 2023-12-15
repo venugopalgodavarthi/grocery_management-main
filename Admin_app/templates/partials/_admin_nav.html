@@ -1,7 +1,5 @@
 <!-- Navbar start -->
 
-
-
 <div class="container-fluid fixed-top">
     <div class="top-link pe-2">
         {% if messages %}
@@ -27,9 +25,13 @@
             </div>
 
             <div class="top-link pe-2">
-                <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+
+                <a href="#" class="text-white"><small class="text-white mx-2">{{user}}</small></a>
+                {% if user.is_authenticated %}
+                <a href="#" class="text-white"><small class="text-white mx-2">{{user.email}}</small>/</a>
+                <a href="{% url 'customer_app:customer_logout'%}" class="text-white"><small
+                        class="text-white ms-2">Logout</small></a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -44,16 +46,17 @@
             </button>
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <a href="#" class="nav-item nav-link active">Home</a>
+                    <a href="{% url 'customer_app:customer_home' %}" class="nav-item nav-link active">Home</a>
                     <a href="{% url 'admin_app:category_list' %}" class="nav-item nav-link">Shop</a>
                     <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                            <a href="cart.html" class="dropdown-item">Cart</a>
-                            <a href="chackout.html" class="dropdown-item">Chackout</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="404.html" class="dropdown-item">404 Page</a>
+                            <a href="{% url 'admin_app:category_register' %}" class="dropdown-item">Category
+                                Register</a>
+                            <a href="{% url 'admin_app:category_list' %}" class="dropdown-item">Category List</a>
+                            <a href="{% url 'admin_app:p_register' %}" class="dropdown-item">Item Register</a>
+                            <a href="{% url 'admin_app:p_list' %}" class="dropdown-item">Item List</a>
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
@@ -68,7 +71,17 @@
                             class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                             style="top: -5px; left: 15px; height: 20px; min-width: 20px;">0</span>
                     </a>
-                    <a href="{% url 'customer_app:customer_welcome'%}" class="my-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profile</a>
+                        <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                            <a href="{% url 'customer_app:customer_update'%}" class="dropdown-item">Profile
+                                Update</a>
+                            <a href="{% url 'customer_app:change_pwd'%}" class="dropdown-item">Change
+                                Password</a>
+                            <a href="testimonial.html" class="dropdown-item">Orders</a>
+                        </div>
+                    </div>
+                    <a href="{% url 'customer_app:customer_logout'%}" class="my-auto">
                         <i class="fas fa-user fa-2x"></i>
                     </a>
                 </div>

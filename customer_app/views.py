@@ -31,11 +31,16 @@ def customer_register_view(request):
     return render(request=request, template_name='customer_register.html', context={'form': form})
 
 
-def customer_update_view(request, pk):
-    res = customer_model.objects.get(id=pk)
+def customer_detail_view(request):
+    res = customer_model.objects.get(id=request.user.id)
+    return render(request=request, template_name='customer_profile.html', context={'form': res})
+
+
+def customer_update_view(request):
+    res = customer_model.objects.get(id=request.user.id)
     form = customer_update_form(instance=res)
     if request.method == 'POST':
-        res = customer_model.objects.get(id=pk)
+        res = customer_model.objects.get(id=request.user.id)
         form = customer_update_form(request.POST, instance=res)
         if form.is_valid():
             form.save()
@@ -54,9 +59,16 @@ def customer_login_view(request):
             user = authenticate(
                 username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user:
-                login(request, user)
-                messages.success(request, "Login Successful")
-                return redirect('/customer_app/customer_home')
+                if user.is_staff:
+                    login(request, user)
+                    messages.success(request, "Admin Login Successful")
+                    return redirect('/customer_app/customer_home')
+                elif user.is_active:
+                    login(request, user)
+                    messages.success(request, "Customer Login Successful")
+                    return redirect('/customer_app/customer_home')
+                else:
+                    messages.Error(request, "Customer Login Failed ")
             else:
                 messages.error(request, "username or password is in-correct")
                 return redirect('/customer_app/customer_home')
@@ -71,9 +83,11 @@ def customer_list_view(request):
 
 @login_required(login_url='/customer_app/customer_login')
 def customer_home_view(request):
-    res = category_items.objects.all()
-    print(res)
-    return render(request=request, template_name='customer_home.html', context={'res': res})
+    return render(request=request, template_name='customer_home.html')
+
+
+def admin_home_view(request):
+    return render(request=request, template_name='admin_home.html')
 
 
 @login_required(login_url='/customer_app/customer_login')
@@ -116,14 +130,14 @@ def customer_otp_view(request, pk):
 
 
 @login_required(login_url='/customer_app/customer_login')
-def change_pwd_view(request, pk):
+def change_pwd_view(request):
     form = change_pwd_form()
     if request.method == 'POST':
-        res = customer_model.objects.get(id=pk)
+        res = customer_model.objects.get(id=request.user.id)
         form = change_pwd_form(request.POST)
         if form.is_valid():
             if form.cleaned_data['enter_new_password'] == form.cleaned_data['re_enter_password']:
-                customer_model.objects.filter(id=pk).update(
+                customer_model.objects.filter(id=request.user.id).update(
                     password=make_password(form.cleaned_data['enter_new_password']))
                 messages.success(request, "Password is succesfully changed")
                 return redirect('/customer_app/customer_login')

@@ -42,9 +42,11 @@
 
 
     {% include "partials/_spinner.html" %}
+
     {% block nav_tag %}
     {% include "partials/_nav.html" %}
     {% endblock %}
+
     <h1>HElloworld</h1>
     <!-- Modal Search Start -->
     <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -125,6 +127,8 @@
     </div>
     <!-- Hero End -->
 
+
+    {% block offer %}
 
     <!-- Featurs Section Start -->
     <div class="container-fluid featurs py-5">
@@ -274,8 +278,10 @@
         </div>
     </div>
     <!-- Tastimonial End -->
-
+    {% endblock %}
+    {% block footer_tag %}
     {% include "partials/_footer.html" %}
+    {% endblock %}
 
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Fruitables - Vegetable Website Template</title>
+    <title>Grocery Admin-Home</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -38,8 +38,10 @@
 
 
 
-    {% include "partials/_spinner.html" %}{% include "partials/_authe_nav.html" %}
+    {% include "partials/_spinner.html" %}{% include "partials/_admin_nav.html" %}
 
+
+    {% block model %}
     <!-- Modal Search Start -->
     <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
@@ -59,8 +61,9 @@
         </div>
     </div>
     <!-- Modal Search End -->
+    {% endblock model %}
 
-
+    {% block hero %}
     <!-- Hero Start -->
     <div class="container-fluid py-5 mb-5 hero-header">
         <div class="container py-5">
@@ -106,8 +109,10 @@
         </div>
     </div>
     <!-- Hero End -->
+    {% endblock hero %}
 
 
+    {% block featurs %}
     <!-- Featurs Section Start -->
     <div class="container-fluid featurs py-5">
         <div class="container py-5">
@@ -160,7 +165,10 @@
         </div>
     </div>
     <!-- Featurs Section End -->
+    {% endblock featurs %}
 
+
+    {% block fruits %}
 
     <!-- Fruits Shop Start-->
     <div class="container-fluid fruite py-5">
@@ -621,7 +629,9 @@
         </div>
     </div>
     <!-- Fruits Shop End-->
+    {% endblock fruits %}
 
+    {% block featur-2 %}
 
     <!-- Featurs Start -->
     <div class="container-fluid service py-5">
@@ -670,7 +680,10 @@
         </div>
     </div>
     <!-- Featurs End -->
+    {% endblock featur-2 %}
 
+
+    {% block vesitable %}
 
     <!-- Vesitable Shop Start-->
     <div class="container-fluid vesitable py-5">
@@ -810,6 +823,10 @@
         </div>
     </div>
     <!-- Vesitable Shop End -->
+    {% endblock vesitable %}
+
+
+    {% block banner %}
 
 
     <!-- Banner Section Start-->
@@ -843,6 +860,10 @@
         </div>
     </div>
     <!-- Banner Section End -->
+    {% endblock banner %}
+
+
+    {% block Bestsaler %}
 
 
     <!-- Bestsaler Product Start -->
@@ -1068,7 +1089,7 @@
         </div>
     </div>
     <!-- Bestsaler Product End -->
-
+    {% endblock Bestsaler %}
 
 
     {% block offer %}
@@ -1111,6 +1132,8 @@
     </div>
     <!-- Fact Start -->
 
+
+    {% block testimonial %}
 
     <!-- Tastimonial Start -->
     <div class="container-fluid testimonial py-5">
@@ -1208,6 +1231,8 @@
         </div>
     </div>
     <!-- Tastimonial End -->
+    {% endblock testimonial %}
+
     {% endblock %}
 
     {% block footer_tag %}

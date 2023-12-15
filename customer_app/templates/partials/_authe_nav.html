@@ -28,9 +28,11 @@
 
             <div class="top-link pe-2">
                 <a href="#" class="text-white"><small class="text-white mx-2">{{user}}</small>/</a>
+                {% if user %}
                 <a href="#" class="text-white"><small class="text-white mx-2">{{user.email}}</small>/</a>
                 <a href="{% url 'customer_app:customer_logout'%}" class="text-white"><small
                         class="text-white ms-2">Logout</small></a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -72,9 +74,9 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profile</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                            <a href="{% url 'customer_app:customer_update' pk=user.id %}" class="dropdown-item">Profile
+                            <a href="{% url 'customer_app:customer_update'%}" class="dropdown-item">Profile
                                 Update</a>
-                            <a href="{% url 'customer_app:change_pwd' pk=user.id %}" class="dropdown-item">Change
+                            <a href="{% url 'customer_app:change_pwd'%}" class="dropdown-item">Change
                                 Password</a>
                             <a href="testimonial.html" class="dropdown-item">Orders</a>
                         </div>
