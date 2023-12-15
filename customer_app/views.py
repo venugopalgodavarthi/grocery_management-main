@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from admin_app.models import category_items
-from customer_app.forms import customer_register_form, customer_login_form, change_pwd_form
+from customer_app.forms import customer_register_form, customer_login_form, change_pwd_form, customer_update_form
 from django.contrib.auth import authenticate, login, logout
 from customer_app.models import customer_model
 from django.contrib.auth.decorators import login_required
@@ -29,6 +29,21 @@ def customer_register_view(request):
         else:
             messages.error(request, "Not Registered.")
     return render(request=request, template_name='customer_register.html', context={'form': form})
+
+
+def customer_update_view(request, pk):
+    res = customer_model.objects.get(id=pk)
+    form = customer_update_form(instance=res)
+    if request.method == 'POST':
+        res = customer_model.objects.get(id=pk)
+        form = customer_update_form(request.POST, instance=res)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "your details is Updated.")
+            return redirect('/customer_app/customer_home')
+        else:
+            messages.error(request, "your details is not Updated.")
+    return render(request=request, template_name='customer_update.html', context={'form': form})
 
 
 def customer_login_view(request):
@@ -100,6 +115,7 @@ def customer_otp_view(request, pk):
     return render(request=request, template_name='customer_otp.html')
 
 
+@login_required(login_url='/customer_app/customer_login')
 def change_pwd_view(request, pk):
     form = change_pwd_form()
     if request.method == 'POST':
@@ -109,5 +125,10 @@ def change_pwd_view(request, pk):
             if form.cleaned_data['enter_new_password'] == form.cleaned_data['re_enter_password']:
                 customer_model.objects.filter(id=pk).update(
                     password=make_password(form.cleaned_data['enter_new_password']))
+                messages.success(request, "Password is succesfully changed")
                 return redirect('/customer_app/customer_login')
+            else:
+                messages.warning(
+                    request, "Password and repassword should be same")
+
     return render(request=request, template_name='create_pwd.html', context={'form': form})

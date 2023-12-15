@@ -41,7 +41,10 @@
 <body>
 
 
-    {% include "partials/_spinner.html" %}{% include "partials/_nav.html" %}
+    {% include "partials/_spinner.html" %}
+    {% block nav_tag %}
+    {% include "partials/_nav.html" %}
+    {% endblock %}
     <h1>HElloworld</h1>
     <!-- Modal Search Start -->
     <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -7,6 +7,8 @@ urlpatterns = [
          view=customer_Welcome_view, name='customer_welcome'),
     path(route='customer_register/',
          view=customer_register_view, name='customer_register'),
+    path(route='customer_update/<pk>/',
+         view=customer_update_view, name='customer_update'),
     path(route='customer_list/', view=customer_list_view, name='customer_list'),
     path(route='customer_login/', view=customer_login_view, name='customer_login'),
     path(route='customer_logout/',

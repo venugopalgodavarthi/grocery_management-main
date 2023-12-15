@@ -86,6 +86,29 @@ class customer_register_form(forms.ModelForm):
             return user
 
 
+class customer_update_form(forms.ModelForm):
+    class Meta:
+        model = customer_model
+        fields = ['first_name', 'last_name',
+                  'email', 'phone', 'gender', 'dob']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        print(self.fields)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control border-2 border-secondary w-55 py-2 px-4 rounded-pill'
+            field.widget.attrs['placeholder'] = "Enter "+str(field.label)
+
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+        if len(str(phone)) != 10:
+            raise forms.ValidationError('Phone number should be 10 digits')
+        if str(phone)[0] not in '9876':
+            raise forms.ValidationError(
+                'Phone numbers start with either 9,8,7,6')
+        return phone
+
+
 class customer_login_form(forms.Form):
     username = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control border-2 border-secondary w-100 py-2 px-4 rounded-pill', 'placeholder': "Username"}))
@@ -143,8 +166,10 @@ class customer_login_form(forms.Form):
 
 class change_pwd_form(forms.Form):
     enter_new_password = forms.CharField(
-        widget=forms.PasswordInput, validators=[clean_enter_new_password])
-    re_enter_password = forms.CharField(widget=forms.PasswordInput)
+        widget=forms.PasswordInput(
+            attrs={'class': 'form-control border-2 border-secondary w-100 py-2 px-4 rounded-pill', 'placeholder': "Password"}), validators=[clean_enter_new_password])
+    re_enter_password = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control border-2 border-secondary w-100 py-2 px-4 rounded-pill', 'placeholder': "RePassword"}))
 
     def clean_re_enter_password(self):
         password = self.cleaned_data['re_enter_password']

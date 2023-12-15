@@ -72,8 +72,10 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profile</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                            <a href="cart.html" class="dropdown-item">Profile Update</a>
-                            <a href="chackout.html" class="dropdown-item">Change Password</a>
+                            <a href="{% url 'customer_app:customer_update' pk=user.id %}" class="dropdown-item">Profile
+                                Update</a>
+                            <a href="{% url 'customer_app:change_pwd' pk=user.id %}" class="dropdown-item">Change
+                                Password</a>
                             <a href="testimonial.html" class="dropdown-item">Orders</a>
                         </div>
                     </div>
