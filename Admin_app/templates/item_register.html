@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Register</title>
+</head>
+<body>
+
+    <h1>Register page</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+       <table>
+        {{form}}
+       </table>
+        <input type="submit" value="Create">
+    </form>
+    <a href="{% url 'admin_app:p_list' %}"><button>Product List</button></a>
+    
+</body>
+</html>

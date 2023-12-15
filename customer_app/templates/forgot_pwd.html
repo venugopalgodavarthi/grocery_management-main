@@ -1,0 +1,28 @@
+{% extends 'base_login.html' %}
+
+{% block title %}
+<title>Forgot Password</title>
+{% endblock %}
+
+
+{% block body_title %}
+<h1 style="text-align: center;">Forgot Password Page</h1>
+{% endblock %}
+
+{% block form %}
+    <label for="id_mail">Enter Email:</label>
+    <input type="email" name="email" id="id_mail"><br>
+    <input type="submit" value="Sent OTP" id="otp">
+{% endblock %}
+
+{% block button %}
+        <input id="submitbutton" type="submit" value="submit" >
+{% endblock %}
+
+
+{% block foot %}
+    <div class="div3">
+        <h4>New User? <a class="register" href="{% url 'customer_app:customer_register' %}"><button  id="Register">Register</button></a></h4>
+        <h4>Existing User? <a class="login" href="{% url 'customer_app:customer_login' %}"><button  id="Login">Login</button></a></h4>
+    </div>
+{% endblock %}
