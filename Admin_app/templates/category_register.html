@@ -67,9 +67,13 @@
                     </button>
                 </div>
                 <h3>List of Categories and Products:</h3>
-                <a href="{% url 'admin_app:category_list' %}"><button>Category List</button></a>
-                <a href="{% url 'admin_app:p_register' %}"><button>Add Product</button></a>
-                <a href="{% url 'admin_app:p_list' %}"><button>Product List</button></a>
+                <a href="{% url 'admin_app:category_list' %}"><button
+                        class="btn btn-primary border-2 border-secondary">Category
+                        List</button></a>
+                <a href="{% url 'admin_app:p_register' %}"><button class="btn btn-primary border-2 border-secondary">Add
+                        Product</button></a>
+                <a href="{% url 'admin_app:p_list' %}"><button class="btn btn-primary border-2 border-secondary">Product
+                        List</button></a>
             </div>
         </div>
     </div>

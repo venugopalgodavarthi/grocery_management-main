@@ -1,26 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category Delete</title>
-</head>
-<body>
-    
-    <div>
-        <h1>Delete Page</h1>
-        <h1>Are you sure to delete record id: {{data.cat_id}} name:{{data.cat_name}}</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            <input type="submit" value="delete"><br>
-        </form>
+{% extends "admin_home.html" %}
+{% load static %}
+{% block model %}
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center">
+            </div>
+        </div>
     </div>
-    <div>
-        <a href="{% url 'admin_app:category_list' %}"><button>Category List</button></a>
-        <a href="{% url 'admin_app:category_register' %}"><button>To Add Category</button></a>
-        <a href="{% url 'admin_app:category_register' %}"><button>To Add Category</button></a>
-        <a href="{% url 'admin_app:p_list' %}"><button>Product List</button></a>
-    </div>
+</div>
+{% endblock model %}
 
-</body>
-</html>
+
+{% block hero %}
+
+
+<div class="container-fluid py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-md-12 col-lg-7">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <h5 class="mb-5 display-3 text-primary">Category Delete</h5>
+                    <h3>Are you sure to delete record id: {{data.cat_id}}</h3>
+                    <h3>Category Name:{{data.cat_name}}</h3>
+                    <div class="position-relative mx-auto">
+                        <button type="submit"
+                            class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-60"
+                            style="top: 0; right: 25%;">Delete Category</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-12 col-lg-5">
+                <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active rounded">
+                            <img src="{{ data.cat_img.url}}" alt="Current Image" width="50" height="50"
+                                class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                        </div>
+                    </div>
+                </div>
+                <h3>List of Categories and Products:</h3>
+                <a href="{% url 'admin_app:category_list' %}"><button
+                        class="btn btn-primary border-2 border-secondary">Category List</button></a>
+                <a href="{% url 'admin_app:p_register' %}"><button class="btn btn-primary border-2 border-secondary">Add
+                        Product</button></a>
+                <a href="{% url 'admin_app:p_list' %}"><button class="btn btn-primary border-2 border-secondary">Product
+                        List</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock hero%}
+
+{% block featurs %}
+{% endblock featurs%}
+
+{% block fruits %}
+{% endblock fruits %}
+
+
+{% block featur-2 %}
+
+{% endblock featur-2 %}
+
+{% block vesitable %}
+
+{% endblock vesitable %}
+
+{% block banner %}
+
+{% endblock banner %}
+
+{% block Bestsaler %}
+
+{% endblock Bestsaler %}
+
+
+{% block testimonial %}
+
+{% endblock testimonial %}
+
+{% block button %}
+{% endblock %}
+
+{% block foot %}
+{% endblock %}
+
+{% block offer %}
+{% endblock %}
+
+{% block footer_tag %}
+{% endblock %}

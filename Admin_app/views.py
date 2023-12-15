@@ -30,7 +30,7 @@ def category_list_view(request):
 def category_update_view(request, pk):
     res = category_items.objects.get(cat_id=pk)
     form = category_form(instance=res)
-    if request.method == 'POST' and request.FILES:
+    if request.method == 'POST' or request.FILES:
         res = category_items.objects.get(cat_id=pk)
         form = category_form(request.POST, request.FILES, instance=res)
         if form.is_valid():
@@ -38,7 +38,7 @@ def category_update_view(request, pk):
             messages.success(request, "Category is Updated.")
         else:
             messages.error(request, "Category is not Updated.")
-    return render(request=request, template_name='category_update.html', context={'data': form})
+    return render(request=request, template_name='category_update.html', context={'data': form, 'res': res})
 
 
 def category_delete_view(request, pk):
@@ -67,8 +67,9 @@ def item_register_view(request):
 
 
 def item_list_view(request):
+    category = category_items.objects.all()
     res = product_item.objects.all()
-    return render(request=request, template_name='item_list.html', context={'data': res})
+    return render(request=request, template_name='item_list.html', context={'data': res, 'category': category})
 
 
 def item_details_view(request):
@@ -89,7 +90,7 @@ def item_update_view(request, pk):
         else:
             messages.error(request, "Product is not Updated")
         return redirect('/admin_app/p_list')
-    return render(request=request, template_name='item_update.html', context={'form': form})
+    return render(request=request, template_name='item_update.html', context={'form': form, 'res': res})
 
 
 def item_delete_view(request, pk):

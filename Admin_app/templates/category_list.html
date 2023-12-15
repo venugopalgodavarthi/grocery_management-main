@@ -1,3 +1,123 @@
+{% extends "admin_home.html" %}
+{% load static %}
+{% block model %}
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center">
+                <div class="input-group w-75 mx-auto d-flex">
+                    <input type="search" class="form-control p-3" placeholder="keywords"
+                        aria-describedby="search-icon-1">
+                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock model %}
+
+
+{% block hero %}
+<div class="container-fluid py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+        </div>
+    </div>
+</div>
+{% endblock hero%}
+
+{% block featurs %}
+{% endblock featurs%}
+
+{% block fruits %}
+{% endblock fruits %}
+
+
+{% block featur-2 %}
+
+{% endblock featur-2 %}
+
+{% block vesitable %}
+
+{% endblock vesitable %}
+
+{% block banner %}
+
+{% endblock banner %}
+
+{% block Bestsaler %}
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto mb-5" style="max-width: 700px;">
+            <h1 class="display-4"> All Categories</h1>
+        </div>
+        <div class="row g-4">
+            {% if data %}
+            {% for i in data%}
+            <div class="card-4 col-lg-6 col-xl-4" style="max-width: 30rem;">
+                <div class="p-4 rounded bg-light">
+                    <div class="row align-items-center">
+                        <a href="#" class="h5">{{i.cat_name|title}}</a><br>
+                        <div class="col-6">
+                            <div class="d-flex justify-content-center align-items-center"
+                                style="width: 150px; height: 150px; border: 1px solid; border-radius: 50%; background-image: url({{i.cat_img.url}}); background-position: center; background-repeat: no-repeat; background-size: auto;">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex my-3">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <a href="{% url 'admin_app:category_update' pk=i.cat_id %}"
+                                class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                    class="fa fa-edit me-2 text-primary"></i> Update </a>
+                            <hr>
+                            <a href="{% url 'admin_app:category_delete' pk=i.cat_id%}"
+                                class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                    class="fa fa-trash me-2 text-primary "></i> Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <h3>List of Categories and Products:</h3>
+        <a href="{% url 'admin_app:category_register' %}"><button
+                class="btn btn-primary border-2 border-secondary">Category
+                Register</button></a>
+        <a href="{% url 'admin_app:p_register' %}"><button class="btn btn-primary border-2 border-secondary">Add
+                Product</button></a>
+        <a href="{% url 'admin_app:p_list' %}"><button class="btn btn-primary border-2 border-secondary">Product
+                List</button></a>
+    </div>
+</div>
+
+{% endblock Bestsaler %}
+
+
+{% block testimonial %}
+
+{% endblock testimonial %}
+
+{% block button %}
+{% endblock %}
+
+{% block foot %}
+{% endblock %}
+
+{% block offer %}
+{% endblock %}
+
+{% block footer_tag %}
+{% endblock %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,12 +139,15 @@
                 <th>id</th>
                 <th>name</th>
                 <th>Image</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
             {% for i in data %}
             <tr>
                 <td>{{i.cat_id}}</td>
                 <td>{{i.cat_name}}</td>
-                <td>{{i.cat_img}}</td>
+
+                <td>{% if i.cat_img %}<img src="{{ i.cat_img.url }}" height="75" width="75">{% endif %}</td>
                 <td><a href=" {% url 'admin_app:category_update' pk=i.cat_id %}"><button>Update</button></a></td>
                 <td><a href="{% url 'admin_app:category_delete' pk=i.cat_id %}"><button>Delete</button></a></td>
 
