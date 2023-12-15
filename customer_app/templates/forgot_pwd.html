@@ -1,4 +1,4 @@
-{% extends 'base_login.html' %}
+{% extends 'base_welcome.html' %}
 
 {% block title %}
 <title>Forgot Password</title>
@@ -6,23 +6,33 @@
 
 
 {% block body_title %}
-<h1 style="text-align: center;">Forgot Password Page</h1>
+<h4 class="mb-3 display-5 text-primary">Forgot Password Page</h4>
 {% endblock %}
 
 {% block form %}
+<form action="" method="post">
+    {% csrf_token %}
     <label for="id_mail">Enter Email:</label>
-    <input type="email" name="email" id="id_mail"><br>
-    <input type="submit" value="Sent OTP" id="otp">
+    <input type="email" name="email" id="id_mail"
+        class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" placeholder="Email"><br>
+    <button type="Submit" class="btn btn-primary border-2 border-secondary  rounded-pill text-white h-100"
+        style="top: 0; right: 25%;">Submit</button>
+</form>
+<hr>
 {% endblock %}
+
 
 {% block button %}
-        <input id="submitbutton" type="submit" value="submit" >
 {% endblock %}
 
-
 {% block foot %}
-    <div class="div3">
-        <h4>New User? <a class="register" href="{% url 'customer_app:customer_register' %}"><button  id="Register">Register</button></a></h4>
-        <h4>Existing User? <a class="login" href="{% url 'customer_app:customer_login' %}"><button  id="Login">Login</button></a></h4>
-    </div>
+<div class="div3">
+    <h4>New User? <a class="register" href="{% url 'customer_app:customer_register' %}"><button type="Submit"
+                class="btn btn-success border-2 border-secondary  rounded-pill text-white h-100"
+                style="top: 0; right: 25%;">Register</button></a></h4>
+
+    <h4>Existing User? <a class="login" href="{% url 'customer_app:customer_login' %}"><button type="Submit"
+                class="btn btn-success border-2 border-secondary  rounded-pill text-white h-100"
+                style="top: 0; right: 25%;">Login</button></a></h4>
+</div>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'base_login.html' %}
+{% extends 'base_welcome.html' %}
 
 {% block title %}
 <title>Customer Register</title>
@@ -10,17 +10,27 @@
 {% endblock %}
 
 {% block form %}
-{{form}}
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{form}}
+
+    </table>
+    <button type="submit" class="btn btn-primary border-2 border-secondary  rounded-pill text-white h-100"
+        style="top: 0; right: 25%;">Register</button>
+</form>
+
 {% endblock %}
 
 {% block button %}
-        <input id="submitbutton" type="submit" value="Register">
 {% endblock %}
 
-
 {% block foot %}
-    <div class="div3    ">
-        <h4>Already User?</h4>
-        <a class="login" href="{% url 'customer_app:customer_login' %}"><button  id="login">Login</button></a><br><br>
-    </div>
+<div class="div3    ">
+    <h4>Already User?</h4>
+    <a class="login" href="{% url 'customer_app:customer_login' %}"><button
+            class="btn btn-secondary border-2 border-primary rounded-pill text-white h-100"
+            style="top: 0; right: 25%;">Customer or Admin Login</button></a>
+    <a href="{%url 'customer_app:forgot_pwd' %}">forgot password?</a>
+</div>
 {% endblock %}
